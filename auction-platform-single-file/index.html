@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuctionHub | Online Auction Platform</title>
+<style>
+:root{--bg:#f5f6f8;--card:#fff;--text:#171a21;--muted:#6b7280;--line:#e5e7eb;--primary:#ff5a1f;--primary2:#e94b14;--dark:#111827;--success:#15803d;--danger:#dc2626;--shadow:0 12px 35px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}button,input,select,textarea{font:inherit}button{cursor:pointer}a{text-decoration:none;color:inherit}.container{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:20px}.logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--primary)}.navlinks{display:flex;gap:24px;align-items:center}.navlinks a{font-weight:650;color:#4b5563}.navlinks a:hover{color:var(--primary)}.nav-actions{display:flex;gap:8px;align-items:center}.btn{border:1px solid #d1d5db;background:#fff;padding:11px 17px;border-radius:9px;font-weight:750;transition:.2s}.btn:hover{transform:translateY(-1px)}.btn.primary{background:var(--primary);border-color:var(--primary);color:#fff}.btn.dark{background:var(--dark);border-color:var(--dark);color:#fff}.btn.small{padding:8px 12px;font-size:14px}.btn.full{width:100%}
+.hero{background:linear-gradient(135deg,#171a21,#292d37);color:#fff;padding:88px 0}.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center}.badge{display:inline-block;background:#fff1eb;color:var(--primary);font-weight:900;font-size:12px;letter-spacing:1.5px;padding:8px 12px;border-radius:30px}.hero h1{font-size:72px;line-height:.96;letter-spacing:-4px;margin:20px 0}.hero h1 span{color:#ff7545}.hero p{color:#d1d5db;font-size:19px;line-height:1.65;max-width:650px}.hero-actions{display:flex;gap:12px;margin-top:28px}.hero-actions .btn:not(.primary){background:transparent;color:#fff;border-color:#6b7280}.hero-card{background:#fff;color:var(--text);border-radius:20px;padding:30px;box-shadow:0 25px 70px rgba(0,0,0,.25)}.hero-card .icon{font-size:50px}.live{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:15px;margin-bottom:18px}.live b{color:var(--danger)}
+section{padding:70px 0}.section-head{display:flex;align-items:end;justify-content:space-between;margin-bottom:25px}.eyebrow{font-size:12px;letter-spacing:2px;color:var(--primary);font-weight:900}.section h2{font-size:38px;margin:7px 0 0;letter-spacing:-1px}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.card{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.03);transition:.2s}.card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}.card-img{height:200px;width:100%;object-fit:cover;background:#e5e7eb}.placeholder{height:200px;background:linear-gradient(135deg,#ddd,#f4f4f4);display:flex;align-items:center;justify-content:center;font-size:45px}.card-body{padding:17px}.tag{font-size:11px;color:var(--primary);font-weight:900;text-transform:uppercase;letter-spacing:1px}.card h3{margin:7px 0 12px;font-size:18px}.price{font-size:23px;font-weight:900}.smalltext{color:var(--muted);font-size:13px}.timer{font-weight:800;color:#b45309;margin-top:12px}.steps{background:#fff}.step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}.step{padding:25px;border:1px solid var(--line);border-radius:15px}.step-number{font-size:38px;color:#d1d5db;font-weight:900}.step h3{margin-bottom:8px}.step p{color:var(--muted);line-height:1.5}
+.filters{display:flex;gap:12px;margin:25px 0}.filters input,.filters select{background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px}.filters input{flex:1}.empty{text-align:center;background:#fff;border:1px dashed #bbb;padding:45px;border-radius:14px;color:var(--muted)}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:20px}.overlay.show{display:flex}.modal{width:min(470px,100%);background:#fff;border-radius:17px;padding:30px;position:relative;max-height:90vh;overflow:auto}.close{position:absolute;right:18px;top:14px;border:0;background:none;font-size:25px}.modal h2{margin-top:0}.form label{display:block;font-weight:700;margin:14px 0}.form input,.form select,.form textarea{width:100%;margin-top:7px;border:1px solid #d1d5db;border-radius:8px;padding:12px}.form textarea{min-height:110px;resize:vertical}.msg{margin:12px 0;padding:10px;border-radius:8px;background:#fff7ed;color:#9a3412;display:none}.msg.show{display:block}
+.detail{display:grid;grid-template-columns:1fr 1fr;gap:45px}.detail-img{width:100%;height:500px;object-fit:cover;border-radius:17px;background:#ddd}.detail-info h1{font-size:45px;line-height:1.05;margin:10px 0}.desc{color:var(--muted);line-height:1.7}.price-box{background:#fff;border:1px solid var(--line);padding:20px;border-radius:13px;margin:25px 0}.price-box small{color:var(--muted);display:block}.price-box strong{font-size:38px;display:block;margin:4px 0}.bid-row{display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding:12px 0}.bid-input{display:flex;gap:10px;margin:15px 0}.bid-input input{flex:1;border:1px solid #ccc;border-radius:8px;padding:12px}
+.dashboard{display:grid;grid-template-columns:1.2fr .8fr;gap:35px}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:23px}.list-item{display:flex;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}.user-pill{padding:7px 11px;border-radius:20px;background:#f3f4f6;font-size:13px;font-weight:700}
+footer{background:#111827;color:#d1d5db;padding:35px 0;text-align:center}
+.toast{position:fixed;right:20px;bottom:20px;background:#111827;color:#fff;padding:14px 18px;border-radius:10px;display:none;z-index:500;box-shadow:var(--shadow)}.toast.show{display:block}
+@media(max-width:900px){.hero-grid,.detail,.dashboard{grid-template-columns:1fr}.grid{grid-template-columns:repeat(2,1fr)}.step-grid{grid-template-columns:repeat(2,1fr)}.hero h1{font-size:55px}.navlinks{display:none}}
+@media(max-width:560px){.grid,.step-grid{grid-template-columns:1fr}.hero{padding:60px 0}.hero h1{font-size:48px}.filters{display:block}.filters>*{width:100%;margin-bottom:10px}.nav-actions .btn:first-child{display:none}.section{padding:50px 0}.detail-info h1{font-size:35px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<a class="logo" href="#" onclick="showPage('home')">Auction<span>Hub</span></a>
+<nav class="navlinks">
+<a href="#" onclick="showPage('home')">Home</a>
+<a href="#" onclick="showPage('auctions')">Auctions</a>
+<a href="#" onclick="showPage('sell')">Sell Item</a>
+<a href="#" onclick="showPage('dashboard')">Dashboard</a>
+</nav>
+<div class="nav-actions" id="navActions"></div>
+</div>
+</header>
+
+<main id="app"></main>
+
+<footer><div class="container"><b>AuctionHub</b><p>Online Auction Platform • Bid smart. Win more.</p></div></footer>
+
+<div class="overlay" id="modalOverlay">
+<div class="modal">
+<button class="close" onclick="closeModal()">×</button>
+<div id="modalContent"></div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='auctionHubDataV1';
+const SESSION='auctionHubUser';
+
+function initialData(){
+return {
+users:[],
+auctions:[
+{id:'a1',title:'iPhone 15 Pro 256GB',category:'Electronics',description:'Premium smartphone in excellent condition. 256GB storage, powerful camera system and original accessories.',price:55000,start:55000,end:Date.now()+86400000*2,bids:[],seller:'Demo Seller',image:'https://images.unsplash.com/photo-1696446701796-da61225697cc?auto=format&fit=crop&w=900&q=80'},
+{id:'a2',title:'Gaming Laptop RTX',category:'Electronics',description:'High performance gaming laptop with dedicated graphics. Great for gaming, coding and creative work.',price:72000,start:72000,end:Date.now()+86400000*3,bids:[],seller:'Demo Seller',image:'https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=900&q=80'},
+{id:'a3',title:'Classic Wrist Watch',category:'Collectibles',description:'Elegant classic wrist watch for collectors and enthusiasts.',price:18000,start:18000,end:Date.now()+86400000,bids:[],seller:'Demo Seller',image:'https://images.unsplash.com/photo-1523170335258-f5ed11844a49?auto=format&fit=crop&w=900&q=80'},
+{id:'a4',title:'Mountain Bicycle',category:'Sports',description:'Lightweight mountain bicycle suitable for trails and daily rides.',price:12500,start:12500,end:Date.now()+86400000*4,bids:[],seller:'Demo Seller',image:'https://images.unsplash.com/photo-1485965120184-e220f721d03e?auto=format&fit=crop&w=900&q=80'}
+]};
+}
+function getData(){let d=JSON.parse(localStorage.getItem(KEY)||'null');if(!d){d=initialData();saveData(d)}return d}
+function saveData(d){localStorage.setItem(KEY,JSON.stringify(d))}
+function currentUser(){return JSON.parse(localStorage.getItem(SESSION)||'null')}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function money(n){return '₹'+Number(n).toLocaleString('en-IN')}
+function toast(t){let x=document.getElementById('toast');x.textContent=t;x.classList.add('show');setTimeout(()=>x.classList.remove('show'),2500)}
+function nav(){
+let u=currentUser(),a=document.getElementById('navActions');
+a.innerHTML=u?`<span class="user-pill">Hi, ${esc(u.name)}</span><button class="btn small" onclick="logout()">Logout</button>`:`<button class="btn small" onclick="openAuth('login')">Login</button><button class="btn primary small" onclick="openAuth('register')">Register</button>`;
+}
+function logout(){localStorage.removeItem(SESSION);nav();showPage('home');toast('Logged out successfully')}
+function openAuth(type){
+document.getElementById('modalContent').innerHTML=type==='login'?`
+<h2>Welcome back</h2><p class="smalltext">Login to bid and manage your auctions.</p>
+<form class="form" onsubmit="login(event)">
+<label>Email<input name="email" type="email" required></label>
+<label>Password<input name="password" type="password" required></label>
+<div class="msg" id="authMsg"></div><button class="btn primary full">Login</button>
+</form>`:`
+<h2>Create account</h2><p class="smalltext">Join AuctionHub as a buyer or seller.</p>
+<form class="form" onsubmit="register(event)">
+<label>Full Name<input name="name" required></label>
+<label>Email<input name="email" type="email" required></label>
+<label>Password<input name="password" type="password" minlength="6" required></label>
+<label>Account Type<select name="role"><option value="buyer">Buyer</option><option value="seller">Seller</option></select></label>
+<div class="msg" id="authMsg"></div><button class="btn primary full">Create Account</button>
+</form>`;
+document.getElementById('modalOverlay').classList.add('show')
+}
+function closeModal(){document.getElementById('modalOverlay').classList.remove('show')}
+function login(e){e.preventDefault();let f=new FormData(e.target),d=getData(),u=d.users.find(x=>x.email===f.get('email').toLowerCase()&&x.password===f.get('password'));if(!u){let m=document.getElementById('authMsg');m.textContent='Invalid email or password';m.classList.add('show');return}localStorage.setItem(SESSION,JSON.stringify(u));closeModal();nav();toast('Login successful');showPage('auctions')}
+function register(e){e.preventDefault();let f=new FormData(e.target),d=getData(),email=f.get('email').toLowerCase();if(d.users.some(x=>x.email===email)){let m=document.getElementById('authMsg');m.textContent='Email already registered';m.classList.add('show');return}let u={id:'u'+Date.now(),name:f.get('name'),email,password:f.get('password'),role:f.get('role')};d.users.push(u);saveData(d);localStorage.setItem(SESSION,JSON.stringify(u));closeModal();nav();toast('Account created successfully');showPage('dashboard')}
+function activeAuctions(){return getData().auctions.filter(a=>a.end>Date.now())}
+function card(a){return `<article class="card"><a href="#" onclick="showPage('detail','${a.id}')">${a.image?`<img class="card-img" src="${a.image}" alt="">`:`<div class="placeholder">🏷️</div>`}<div class="card-body"><span class="tag">${esc(a.category)}</span><h3>${esc(a.title)}</h3><div class="price">${money(currentPrice(a))}</div><div class="smalltext">${a.bids.length} bid(s)</div><div class="timer" data-end="${a.end}"></div></div></a></article>`}
+function currentPrice(a){return a.bids.length?Math.max(...a.bids.map(b=>b.amount)):a.price}
+function timerText(end){let x=end-Date.now();if(x<=0)return 'Auction ended';let d=Math.floor(x/86400000),h=Math.floor(x/3600000)%24,m=Math.floor(x/60000)%60,s=Math.floor(x/1000)%60;return d?`${d}d ${h}h ${m}m left`:`${h}h ${m}m ${s}s left`}
+function startTimers(){document.querySelectorAll('[data-end]').forEach(x=>x.textContent=timerText(Number(x.dataset.end)))}
+function home(){
+let p=activeAuctions().sort((a,b)=>a.end-b.end).slice(0,4);
+return `<section class="hero"><div class="container hero-grid"><div><span class="badge">LIVE ONLINE AUCTIONS</span><h1>Bid. Win.<br><span>Own It.</span></h1><p>Discover unique products, place competitive bids and win your next great deal on a simple online auction marketplace.</p><div class="hero-actions"><button class="btn primary" onclick="showPage('auctions')">Explore Auctions</button><button class="btn" onclick="showPage('sell')">Start Selling</button></div></div><div class="hero-card"><div class="live"><b>● LIVE</b><span>Real-time marketplace</span></div><div class="icon">🔨</div><h2>Competitive Bidding</h2><p class="smalltext">Find an item, place a higher bid and become the highest bidder before the countdown reaches zero.</p><button class="btn dark full" onclick="showPage('auctions')">Browse Live Items</button></div></div></section>
+<section><div class="container"><div class="section-head"><div><div class="eyebrow">FEATURED</div><h2>Ending Soon</h2></div><a href="#" onclick="showPage('auctions')">View all →</a></div><div class="grid">${p.map(card).join('')||'<div class="empty">No active auctions yet.</div>'}</div></div></section>
+<section class="steps"><div class="container"><div class="eyebrow">HOW IT WORKS</div><h2>Simple, secure, exciting.</h2><div class="step-grid"><div class="step"><div class="step-number">01</div><h3>Create an account</h3><p>Register as a buyer or seller in seconds.</p></div><div class="step"><div class="step-number">02</div><h3>Find an auction</h3><p>Browse products and discover something you love.</p></div><div class="step"><div class="step-number">03</div><h3>Place your bid</h3><p>Enter an amount higher than the current highest bid.</p></div><div class="step"><div class="step-number">04</div><h3>Win the item</h3><p>Highest bidder wins when the auction ends.</p></div></div></div></section>`}
+function auctions(){
+return `<section><div class="container"><div class="eyebrow">MARKETPLACE</div><h2>Live Auctions</h2><div class="filters"><input id="search" oninput="filterAuctions()" placeholder="Search auctions..."><select id="cat" onchange="filterAuctions()"><option>All categories</option><option>Electronics</option><option>Fashion</option><option>Vehicles</option><option>Collectibles</option><option>Art</option><option>Sports</option><option>Home</option><option>Other</option></select></div><div id="auctionGrid" class="grid"></div></div></section>`}
+function filterAuctions(){let q=(document.getElementById('search')?.value||'').toLowerCase(),c=document.getElementById('cat')?.value,d=activeAuctions().filter(a=>(a.title+' '+a.description).toLowerCase().includes(q)&&(c==='All categories'||a.category===c));document.getElementById('auctionGrid').innerHTML=d.length?d.map(card).join(''):'<div class="empty">No matching active auctions.</div>';startTimers()}
+function detail(id){
+let a=getData().auctions.find(x=>x.id===id);if(!a)return '<section><div class="container"><div class="empty">Auction not found.</div></div></section>';let bids=[...a.bids].sort((x,y)=>y.amount-x.amount);
+return `<section><div class="container"><div class="detail"><div>${a.image?`<img class="detail-img" src="${a.image}">`:`<div class="detail-img placeholder">🏷️</div>`}</div><div class="detail-info"><span class="tag">${esc(a.category)}</span><h1>${esc(a.title)}</h1><p class="desc">${esc(a.description)}</p><div class="price-box"><small>Current highest bid</small><strong>${money(currentPrice(a))}</strong><span class="smalltext">${a.bids.length} bid(s) • Seller: ${esc(a.seller)}</span></div><div class="timer" data-end="${a.end}"></div>${a.end>Date.now()?`<div class="bid-input"><input id="bidAmount" type="number" min="${currentPrice(a)+1}" placeholder="Enter your bid"><button class="btn primary" onclick="placeBid('${a.id}')">Place Bid</button></div>`:`<p><b>Auction ended.</b></p>`}<div class="msg" id="bidMsg"></div><h3>Recent Bids</h3>${bids.length?bids.slice(0,10).map(b=>`<div class="bid-row"><span>${esc(b.userName)}</span><b>${money(b.amount)}</b></div>`).join(''):'<p class="smalltext">No bids yet. Be the first!</p>'}</div></div></div></section>`}
+function placeBid(id){let u=currentUser();if(!u){openAuth('login');return}let amount=Number(document.getElementById('bidAmount').value),d=getData(),a=d.auctions.find(x=>x.id===id),cur=currentPrice(a),m=document.getElementById('bidMsg');if(!amount||amount<=cur){m.textContent=`Your bid must be higher than ${money(cur)}.`;m.classList.add('show');return}if(Date.now()>a.end){m.textContent='This auction has ended.';m.classList.add('show');return}a.bids.push({userId:u.id,userName:u.name,amount,time:Date.now()});saveData(d);toast('Bid placed successfully!');showPage('detail',id)}
+function sell(){
+let u=currentUser();if(!u)return `<section><div class="container"><div class="empty"><h2>Login required</h2><p>Please login or register as a seller.</p><button class="btn primary" onclick="openAuth('login')">Login</button></div></div></section>`;
+if(u.role!=='seller')return `<section><div class="container"><div class="empty"><h2>Seller account required</h2><p>Your current account is a buyer. Logout and register a seller account to create auctions.</p></div></div></section>`;
+return `<section><div class="container" style="max-width:800px"><div class="eyebrow">SELL</div><h2>Create an Auction</h2><p class="smalltext">List your item and let buyers compete for it.</p><form class="form panel" onsubmit="createAuction(event)"><label>Product Title<input name="title" required placeholder="e.g. iPhone 15 Pro"></label><label>Description<textarea name="description" required placeholder="Describe the item, condition and features"></textarea></label><label>Category<select name="category"><option>Electronics</option><option>Fashion</option><option>Vehicles</option><option>Collectibles</option><option>Art</option><option>Sports</option><option>Home</option><option>Other</option></select></label><label>Starting Price (₹)<input name="price" type="number" min="1" required></label><label>Auction Duration<select name="duration"><option value="1">1 Day</option><option value="2">2 Days</option><option value="3">3 Days</option><option value="7">7 Days</option></select></label><label>Product Image URL <span class="smalltext">(optional)</span><input name="image" placeholder="https://..."></label><button class="btn primary full">Publish Auction</button></form></div></section>`}
+function createAuction(e){e.preventDefault();let f=new FormData(e.target),u=currentUser(),d=getData();let a={id:'a'+Date.now(),title:f.get('title'),category:f.get('category'),description:f.get('description'),price:Number(f.get('price')),start:Number(f.get('price')),end:Date.now()+Number(f.get('duration'))*86400000,bids:[],seller:u.name,sellerId:u.id,image:f.get('image')};d.auctions.push(a);saveData(d);toast('Auction published!');showPage('detail',a.id)}
+function dashboard(){
+let u=currentUser();if(!u)return `<section><div class="container"><div class="empty"><h2>Please login</h2><button class="btn primary" onclick="openAuth('login')">Login</button></div></div></section>`;
+let d=getData(),mine=d.auctions.filter(a=>a.sellerId===u.id),bids=d.auctions.flatMap(a=>a.bids.filter(b=>b.userId===u.id).map(b=>({b,a})));
+return `<section><div class="container"><div class="eyebrow">ACCOUNT</div><h2>My Dashboard</h2><p>Welcome, <b>${esc(u.name)}</b> • ${u.role}</p><div class="dashboard"><div class="panel"><h3>My Auctions</h3>${u.role==='seller'?(mine.length?mine.map(a=>`<div class="list-item"><div><b>${esc(a.title)}</b><div class="smalltext">${a.bids.length} bid(s) • ${money(currentPrice(a))}</div></div><button class="btn small" onclick="showPage('detail','${a.id}')">View</button></div>`).join(''):'<p class="smalltext">You have not created an auction yet.</p>'):'<p class="smalltext">Register as a seller to create auctions.</p>'}</div><div class="panel"><h3>My Bids</h3>${bids.length?bids.map(x=>`<div class="list-item"><div><b>${esc(x.a.title)}</b><div class="smalltext">Your bid: ${money(x.b.amount)}</div></div><button class="btn small" onclick="showPage('detail','${x.a.id}')">View</button></div>`).join(''):'<p class="smalltext">You have not placed any bids yet.</p>'}</div></div></div></section>`}
+function showPage(page,id){
+let content=page==='home'?home():page==='auctions'?auctions():page==='detail'?detail(id):page==='sell'?sell():dashboard();document.getElementById('app').innerHTML=content;nav();window.scrollTo(0,0);if(page==='auctions')filterAuctions();startTimers()}
+document.addEventListener('DOMContentLoaded',()=>{getData();showPage('home');setInterval(()=>{document.querySelectorAll('[data-end]').forEach(x=>x.textContent=timerText(Number(x.dataset.end)))},1000)})
+</script>
+</body>
+</html>
